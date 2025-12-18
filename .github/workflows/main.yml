@@ -60,3 +60,9 @@ jobs:
       # 4. docker pull 명령에 태그(v1.0) 추가
       - name: docker image pull
         run: docker pull ${{env.DOCKER_USERNAME}}/devops_step2:v1.0
+
+      - name: docker-compose 경로
+        run: cd /home/kosa/kosa-devops-step2
+
+      - name: docker-compose up 실행
+        run: docker-compose -f docker-compose_nginx.yml up -d
