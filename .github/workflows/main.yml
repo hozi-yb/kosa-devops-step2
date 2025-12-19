@@ -101,6 +101,6 @@ jobs:
       - name: 운영서버로 파일 복사
         run: | 
           cd kosa-devops-step2
-          scp ./docker-compose_nginx.yml aws-master
-          scp -r ./nginx/nginx.conf aws-master
+          scp ./docker-compose_nginx.yml aws-master:~
+          scp -r ./nginx/nginx.conf aws-master:~
           ssh aws-master ./run.sh > /dev/null
