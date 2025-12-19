@@ -33,7 +33,7 @@ jobs:
         
       # 2. docker build 뒤에 빌드 컨텍스트 (.) 추가
       - name: docker image 생성
-        run: docker build -t ${{env.DOCKER_USERNAME}}/devops_step2:v1.0 .
+        run: docker build -t ${{env.DOCKER_USERNAME}}/devops_step2:latest .
         
       - name: docker login
         uses: docker/login-action@v1
@@ -43,7 +43,7 @@ jobs:
           
       # 3. Step 이름 오타 수정 및 Docker Hub에 Push
       - name: docker image 허브에 저장
-        run: docker push ${{env.DOCKER_USERNAME}}/devops_step2:v1.0
+        run: docker push ${{env.DOCKER_USERNAME}}/devops_step2:latest
         
   deploy:
     needs: build
@@ -64,9 +64,9 @@ jobs:
           username: ${{env.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
           
-      # 4. docker pull 명령에 태그(v1.0) 추가
+      # 4. docker pull 명령에 태그(latest) 추가
       - name: docker image pull
-        run: docker pull ${{env.DOCKER_USERNAME}}/devops_step2:v1.0
+        run: docker pull ${{env.DOCKER_USERNAME}}/devops_step2:latest
 
       - name: docker-compose up 실행
         run: docker compose -f docker-compose_nginx.yml up -d
